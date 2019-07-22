@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lesson 2</string>
+    <string name="start">Start</string>
+    <string name="thread">Thread</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="spam">Spam</string>
+    <string name="unsubscribe">Unsubscribe</string>
+    <string name="magazine_gg">Magazine: GG</string>
+</resources>
