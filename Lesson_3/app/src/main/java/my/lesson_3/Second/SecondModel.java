@@ -1,0 +1,50 @@
+package my.lesson_3.Second;
+
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Single;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.schedulers.Schedulers;
+
+public class SecondModel {
+
+    public static final String TAG = "Model";
+    private StringBuffer modelString;
+    private ArrayList<String> messageList;
+    private int i = 0;
+
+
+    public SecondModel() {
+        messageList = new ArrayList<>();
+        messageList.add("-Hello!");
+        messageList.add("-How are you?");
+        messageList.add("-Buy magazine");
+        messageList.add("-Plz");
+        messageList.add("-Buy");
+        messageList.add("-Please buy it!");
+        messageList.add("-Buy this magazine");
+        messageList.add("-Are u still here?");
+        messageList.add("-So BUY!");
+
+        modelString = new StringBuffer();
+    }
+
+    public Single<String> getServer() {
+        Single<String> single = Single.create((SingleOnSubscribe<String>) emitter -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+                emitter.onSuccess(messageList.get(i));
+                i++;
+                if (i >= messageList.size()) {
+                    i = 2;
+                }
+            } catch (InterruptedException e) {
+                Log.e(TAG, "Interrupted");
+            }
+        }).subscribeOn(Schedulers.io());
+        return single;
+    }
+}
